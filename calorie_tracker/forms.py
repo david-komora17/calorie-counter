@@ -19,3 +19,12 @@ class FoodItemForm(forms.ModelForm):
                 'placeholder': 'Enter calories'
             }),
         }
+
+    def clean_calories(self):
+        calories = self.cleaned_data.get('calories')
+        if calories <= 0:
+            raise forms.ValidationError('Calories must be a positive number.')
+        if calories <= 5000:
+            raise forms.ValidationError('Calories must be a positive number.')
+        return calories
+    
