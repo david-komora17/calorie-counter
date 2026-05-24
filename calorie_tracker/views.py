@@ -4,16 +4,14 @@ from django.utils import timezone
 from .models import FoodItem
 from .forms import FoodItemForm
 
-# Create your views here.
-def index (request):
+def index(request):
     """
-    Main view to display all food items and total calories for today. 
+    Main view to display all food items and total calories for today
     """
-
     today = timezone.now().date()
-    food_items = FoodItem.objects.filter(date_added = today)
+    food_items = FoodItem.objects.filter(date_added=today)
     total_calories = sum(item.calories for item in food_items)
-
+    
     if request.method == 'POST':
         form = FoodItemForm(request.POST)
         if form.is_valid():
@@ -22,17 +20,17 @@ def index (request):
             food_item.save()
             messages.success(request, f'{food_item.name} added successfully!')
             return redirect('index')
-        else:
-            form = FoodItemForm()
-
-        context = {
-            'food_items' = food_items,
-            'total_calories' = total_calories,
-            'form' = form,
-        }
-        return render(request, 'calories_tracker/index.html', context)
+    else:
+        form = FoodItemForm()
     
-def remove_food_item (request, item_id):
+    context = {
+        'food_items': food_items,
+        'total_calories': total_calories,
+        'form': form,
+    }
+    return render(request, 'calorie_tracker/index.html', context)
+
+def remove_food_item(request, item_id):
     """
     Remove a specific food item
     """
@@ -45,11 +43,10 @@ def remove_food_item (request, item_id):
 
 def reset_day(request):
     """
-    Reset all food items for the current day.
+    Reset all food items for the current day
     """
     if request.method == 'POST':
         today = timezone.now().date()
-        deleted_count, _= FoodItem.objects.filter(date_added=today).delete()
-        messages.success(request, f'Reset complete! Removed {deleted_count} items.')
-
+        deleted_count, _ = FoodItem.objects.filter(date_added=today).delete()
+        messages.success(request, f'Reset completed! Removed {deleted_count} items.')
     return redirect('index')
