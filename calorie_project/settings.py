@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'calorie_tracker'
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'calorie_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/ 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,13 +75,13 @@ WSGI_APPLICATION = 'calorie_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'calorie_db',
-        'USER': 'postgres',
-        'PASSWORD': 'Dkomora17',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'calorie_db',        # Database name you created in pgAdmin
+        'USER': 'postgres',           # Default PostgreSQL user
+        'PASSWORD': 'Dkomora17',  # Your PostgreSQL password
+        'HOST': 'localhost',          # Or 127.0.0.1
+        'PORT': '5432',               # Default PostgreSQL port
     }
 }
 

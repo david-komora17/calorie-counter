@@ -19,7 +19,7 @@ def index(request):
             food_item.date_added = today
             food_item.save()
             messages.success(request, f'{food_item.name} added successfully!')
-            return redirect('index')
+            return redirect('calorie_tracker:index')
     else:
         form = FoodItemForm()
     
@@ -39,7 +39,7 @@ def remove_food_item(request, item_id):
         item_name = food_item.name
         food_item.delete()
         messages.success(request, f'{item_name} removed successfully!')
-    return redirect('index')
+    return redirect('calorie_tracker:index')
 
 def reset_day(request):
     """
@@ -49,4 +49,4 @@ def reset_day(request):
         today = timezone.now().date()
         deleted_count, _ = FoodItem.objects.filter(date_added=today).delete()
         messages.success(request, f'Reset completed! Removed {deleted_count} items.')
-    return redirect('index')
+    return redirect('calorie_tracker:index')
