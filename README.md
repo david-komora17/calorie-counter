@@ -1,4 +1,3 @@
-```markdown
 #  Calorie Counter App
 
 A Django-based web application to track daily calorie intake with PostgreSQL backend and Tailwind CSS styling.
