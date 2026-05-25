@@ -8,4 +8,3 @@ class FoodItemAdmin(admin.ModelAdmin):
     list_filter = ['date_added']
     search_fields = ['name']
 
-    
